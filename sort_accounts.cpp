@@ -6,7 +6,7 @@
 int main(int argc, char **argv) {
   if (argc < 3) {
     std::cout << "usage: sort_accounts <file> ";
-    std::cout << "<bubble|quick>" << std::endl;
+    std::cout << "<bubble|quick_it|quick_rec>" << std::endl;
     return 1;
   }
 
@@ -21,9 +21,14 @@ int main(int argc, char **argv) {
   ifs >> accounts;
 
   // TODO: Other sorts
-  if (method == "quick") {
-    std::cout << "QUICKSORT" << std::endl;
+  if (method == "quick_rec") {
+    std::cout << "QUICKSORT RECURSIVE" << std::endl;
     quicksort(accounts);
+  } else if (method == "quick_it") {
+    std::cout << "QUICKSORT ITERATIVE, PIVOT AS END" << std::endl;
+    quicksort_end(accounts);
+  } else {
+    std::cout << "Unknown method " << method << std::endl;
   }
 
   std::cout << accounts;
