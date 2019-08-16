@@ -1,4 +1,5 @@
 #include "account.hpp"
+#include <iomanip>
 
 bool operator<(const account &a, const account &b) { return a.id < b.id; }
 
@@ -14,7 +15,8 @@ std::istream &operator>>(std::istream &stream, account &account) {
 std::ostream &operator<<(std::ostream &stream, const account &account) {
   stream << "User ID #" << account.id;
   stream << ", " << account.name << ", has $";
-  stream << account.balance << "." << std::endl;
+  stream << std::fixed << std::setprecision(2) << account.balance;
+  stream << ".";
   return stream;
 }
 
@@ -27,8 +29,8 @@ std::istream &operator>>(std::istream &stream, std::vector<account> &vec) {
 }
 
 std::ostream &operator<<(std::ostream &stream, std::vector<account> &vec) {
-  stream << vec.size() << "account(s):" << std::endl;
-  for (auto acct : vec) {
+  stream << vec.size() << " account(s):" << std::endl;
+  for (const auto &acct : vec) {
     stream << acct << std::endl;
   }
   return stream;
