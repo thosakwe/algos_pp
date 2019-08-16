@@ -13,7 +13,7 @@ struct account {
 
 std::istream &operator>>(std::istream &stream, account &account);
 std::ostream &operator<<(std::ostream &stream, const account &account);
-
-void read_accounts(std::istream &stream, std::vector<account> &vec);
+std::istream &operator>>(std::istream &stream, std::vector<account> &vec);
+std::ostream &operator<<(std::ostream &stream, std::vector<account> &vec);
 
 #endif

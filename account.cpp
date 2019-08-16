@@ -18,9 +18,18 @@ std::ostream &operator<<(std::ostream &stream, const account &account) {
   return stream;
 }
 
-void read_accounts(std::istream &stream, std::vector<account> &vec) {
+std::istream &operator>>(std::istream &stream, std::vector<account> &vec) {
   account acct;
   while (stream >> acct) {
     vec.push_back(acct);
   }
+  return stream;
+}
+
+std::ostream &operator<<(std::ostream &stream, std::vector<account> &vec) {
+  stream << vec.size() << "account(s):" << std::endl;
+  for (auto acct : vec) {
+    stream << acct << std::endl;
+  }
+  return stream;
 }

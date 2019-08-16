@@ -4,3 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_library(algos_pp
     account.cpp account.hpp
     quicksort.cpp quicksort.hpp)
+
+link_libraries(algos_pp)
+add_executable(dump_accounts dump_accounts.cpp)
+add_executable(quicksort_demo quicksort_demo.cpp)
