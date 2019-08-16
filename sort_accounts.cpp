@@ -1,10 +1,12 @@
 #include "account.hpp"
+#include "quicksort.hpp"
 #include <fstream>
 #include <iostream>
 
 int main(int argc, char **argv) {
   if (argc < 3) {
-    std::cout << "usage: sort_accounts <file> <bubble|quick>" << std::endl;
+    std::cout << "usage: sort_accounts <file> ";
+    std::cout << "<bubble|quick>" << std::endl;
     return 1;
   }
 
@@ -19,8 +21,9 @@ int main(int argc, char **argv) {
   ifs >> accounts;
 
   // TODO: Other sorts
-  if (method == "bubble") {
-
+  if (method == "quick") {
+    std::cout << "QUICKSORT" << std::endl;
+    quicksort(accounts);
   }
 
   std::cout << accounts;

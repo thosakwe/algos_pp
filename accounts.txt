@@ -9,7 +9,7 @@
 14;Nayvadius Wilburn;808
 6;Sparta;300
 9;Sparta;300
-5;Canonical Nigerian Scammer;4.19
+15;Canonical Nigerian Scammer;4.19
 12;Sparta;300
 7;Sparta;300
 13;Sparta;300

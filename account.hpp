@@ -9,6 +9,10 @@ struct account {
   std::string name;
   float balance;
   friend bool operator<(const account &a, const account &b);
+  friend bool operator>(const account &a, const account &b);
+  friend bool operator<=(const account &a, const account &b);
+  friend bool operator>=(const account &a, const account &b);
+  friend bool operator==(const account &a, const account &b);
 };
 
 std::istream &operator>>(std::istream &stream, account &account);

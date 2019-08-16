@@ -17,6 +17,8 @@ int main(int argc, char **argv) {
 
   std::vector<account> accounts;
   ifs >> accounts;
-  std::cout << accounts;
+  for (const auto &acct : accounts) {
+      std::cout << acct << std::endl;
+  }
   return 0;
 }
