@@ -1,0 +1,15 @@
+10;Sparta;300
+1;Bobby Tables;13.37
+8;Sparta;300
+0;Tobe O.;5000000.56
+11;Sparta;300
+2;Jill Tables;560.34
+4;Fetty Wap;1738.0
+5;Sparta;300
+14;Nayvadius Wilburn;808
+6;Sparta;300
+9;Sparta;300
+5;Canonical Nigerian Scammer;4.19
+12;Sparta;300
+7;Sparta;300
+13;Sparta;300
