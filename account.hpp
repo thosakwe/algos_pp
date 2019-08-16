@@ -2,6 +2,7 @@
 #define ALGOS_PP_ACCOUNT_HPP
 #include <iostream>
 #include <string>
+#include <vector>
 
 struct account {
   int id;
@@ -10,7 +11,9 @@ struct account {
   friend bool operator<(const account &a, const account &b);
 };
 
-std::istream &operator>>(account &account, std::istream &stream);
-std::ostream &operator<<(account &account, std::ostream &stream);
+std::istream &operator>>(std::istream &stream, account &account);
+std::ostream &operator<<(std::ostream &stream, const account &account);
+
+void read_accounts(std::istream &stream, std::vector<account> &vec);
 
 #endif
