@@ -1,7 +1,9 @@
 #ifndef ALGOS_PP_HASH_MAP_HPP
 #define ALGOS_PP_HASH_MAP_HPP
 #include <functional>
+#include <iostream>
 #include <memory>
+#include <stack>
 
 namespace algos_pp {
 template <typename K, typename V, class Hash = std::hash<K>> class hash_map {
@@ -9,46 +11,75 @@ public:
   struct node {
     typename Hash::result_type index;
     V data;
-    std::unique_ptr<node> left, right;
+    std::shared_ptr<node> left, right;
+    node() = default;
+    node(typename Hash::result_type i, V d) : index(i), data(d) {}
   };
 
 private:
   Hash hash;
-  std::unique_ptr<node> root;
+  std::shared_ptr<node> root;
+
+  bool insert(std::shared_ptr<node> &head, typename Hash::result_type index,
+              V value, bool preserve = false) {
+    if (!head) {
+      head = std::make_shared<node>(index, value);
+      return true;
+    } else if (index == head->index) {
+      if (!preserve) {
+        head->data = value;
+        return true;
+      } else {
+        return false;
+      }
+    } else if (index < head->index) {
+      return insert(head->left, index, value);
+    } else {
+      return insert(head->right, index, value);
+    }
+  }
 
 public:
-  bool find(K key, V *value) {
-    auto &cur = root;
+  void dump(std::ostream &out) const {
+    std::stack<std::shared_ptr<node>> stack;
+    if (root)
+      stack.push(root);
+    while (!stack.empty()) {
+      auto cur = stack.top();
+      stack.pop();
+      out << "[" << cur->index << "]=" << cur->data << std::endl;
+      if (cur->left)
+        stack.push(cur->left);
+      if (cur->right)
+        stack.push(cur->right);
+    }
+  }
+
+  bool find(K key, V *value) const {
+    auto cur = root;
     auto index = hash(key);
     while (cur) {
-      if (cur.index == index) {
-        *value = cur.data;
+      if (cur->index == index) {
+        //        std::cout << "Found hash " << index << " for key " << key << "
+        //        = "
+        //                  << cur->data << std::endl;
+        *value = cur->data;
         return true;
-      } else if (cur.index > index) {
-        cur = cur.left;
+      } else if (cur->index > index) {
+        cur = cur->left;
       } else {
-        cur = cur.right;
+        cur = cur->right;
       }
     }
     return false;
   }
 
-  void insert(K key, V value) {
-    auto &cur = root;
+  bool insert(K key, V value, bool preserve = false) {
     auto index = hash(key);
-    while (cur) {
-      if (cur.index == index)
-        return;
-      else if (cur.index > index) {
-        cur = cur.left;
-      } else {
-        cur = cur.right;
-      }
-    }
-    cur = {index, value};
+    return insert(root, index, value, preserve);
   }
 
-  V operator[](K key) {
+  V operator[](K key) const {
     auto value = V();
     find(key, &value);
     return value;
